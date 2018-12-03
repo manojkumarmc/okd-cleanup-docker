@@ -1,0 +1,5 @@
+---
+- hosts: cnodes
+  become: true
+  roles:
+    - cleanup
