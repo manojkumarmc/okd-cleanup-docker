@@ -1,0 +1,43 @@
+---
+
+- name: stop docker service
+  service: name=docker state=stopped
+  ignore_errors: True
+
+- name: uninstall docker full
+  yum: name={{item}} state=absent
+  with_items:
+    - docker
+    - docker-client
+    - docker-client-latest
+    - docker-common
+    - docker-latest
+    - docker-latest-logrotate
+    - docker-logrotate
+    - docker-selinux
+    - docker-engine-selinux
+    - docker-engine
+    - python-docker-pycreds
+    - docker-ce
+    - docker-ce-cli
+    - python-docker-py
+
+
+# # - name: unmount docker folder
+# #   command: umount /dev/mapper/cl-root
+
+- name: remove var lib docker
+  command: rm -rf /var/lib/docker
+
+- name: remove docker-ce repo
+  file: name=/etc/yum.repos.d/docker-ce.repo state=absent
+
+- name: remove CentOS-OpenShift-Origin39.repo
+  file: name=/etc/yum.repos.d/CentOS-OpenShift-Origin39.repo state=absent
+
+- name: remove CentOS-OpenShift-Origin37.repo
+  file: name=/etc/yum.repos.d/CentOS-OpenShift-Origin37.repo state=absent
+
+- name: remove CentOS-OpenShift-Origin.repo
+  file: name=/etc/yum.repos.d/CentOS-OpenShift-Origin.repo state=absent
+
