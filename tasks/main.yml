@@ -22,7 +22,6 @@
     - docker-ce-cli
     - python-docker-py
 
-
 # # - name: unmount docker folder
 # #   command: umount /dev/mapper/cl-root
 
@@ -40,4 +39,3 @@
 
 - name: remove CentOS-OpenShift-Origin.repo
   file: name=/etc/yum.repos.d/CentOS-OpenShift-Origin.repo state=absent
-
