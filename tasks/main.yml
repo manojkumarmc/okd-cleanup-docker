@@ -5,7 +5,7 @@
   ignore_errors: True
 
 - name: uninstall docker full
-  yum: name={{item}} state=absent
+  yum: name={{ item }} state=absent
   with_items:
     - docker
     - docker-client
@@ -26,7 +26,7 @@
 # #   command: umount /dev/mapper/cl-root
 
 - name: remove var lib docker
-  command: rm -rf /var/lib/docker
+  file: name=/var/lib/docker/ state=absent
 
 - name: remove docker-ce repo
   file: name=/etc/yum.repos.d/docker-ce.repo state=absent
